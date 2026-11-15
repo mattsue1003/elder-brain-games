@@ -1,0 +1,653 @@
+{
+"bird_sparrow": {
+"zh": "麻雀",
+"title": "Eurasian tree sparrow",
+"file": "Tree_Sparrow_August_2007_Osaka_Japan.jpg",
+"artist": "Laitche",
+"license": "Public domain"
+},
+"bird_bulbul": {
+"zh": "白頭翁",
+"title": "Light-vented bulbul",
+"file": "Light-vented_Bulbul2.jpg",
+"artist": "Flickr user CharlesLam . Photo uploaded to commons by user ltshears",
+"license": "CC BY-SA 2.0"
+},
+"bird_whiteeye": {
+"zh": "綠繡眼",
+"title": "Swinhoe's white-eye",
+"file": "Resting_Zosterops_japonicus.jpg",
+"artist": "Charles Lam",
+"license": "CC BY-SA 2.0"
+},
+"bird_bluemagpie": {
+"zh": "臺灣藍鵲",
+"title": "Taiwan blue magpie",
+"file": "Taiwan_blue_magpie_(Urocissa_caerulea)_Xindian.jpg",
+"artist": "Charles J. Sharp",
+"license": "CC BY-SA 4.0"
+},
+"bird_blackbulbul": {
+"zh": "紅嘴黑鵯",
+"title": "Black bulbul",
+"file": "Black_Bulbul_0A2A0215.jpg",
+"artist": "JJ Harrison",
+"license": "CC BY-SA 4.0"
+},
+"bird_egret": {
+"zh": "小白鷺（白鷺鷥）",
+"title": "Little egret",
+"file": "Little_egret_(Egretta_garzetta)_Photograph_by_Shantanu_Kuveskar.jpg",
+"artist": "Shantanu Kuveskar",
+"license": "CC BY-SA 4.0"
+},
+"bird_nightheron": {
+"zh": "夜鷺",
+"title": "Black-crowned night heron",
+"file": "Nycticorax_nycticorax_457953189.jpg",
+"artist": "ramidos",
+"license": "CC BY 4.0"
+},
+"bird_kingfisher": {
+"zh": "翠鳥",
+"title": "Common kingfisher",
+"file": "Alcedo_atthis_-England-8_(cropped).jpg",
+"artist": "Tony Wood",
+"license": "CC BY 2.0"
+},
+"bird_barbet": {
+"zh": "五色鳥",
+"title": "Taiwan barbet",
+"file": "Taiwan_barbet_(Psilopogon_nuchalis)_Qianshan.jpg",
+"artist": "Charles J. Sharp",
+"license": "CC BY-SA 4.0"
+},
+"bird_bittern": {
+"zh": "黑冠麻鷺",
+"title": "Malayan night heron",
+"file": "Malayan_Night-Heron_-_Taiwan_S4E8695_(17320173361).jpg",
+"artist": "Francesco Veronesi from Italy",
+"license": "CC BY-SA 2.0"
+},
+"old_sewing": {
+"zh": "縫紉機（裁縫車）",
+"title": "antique treadle sewing machine",
+"file": "VS IIa White Treadle Sewing Machine.jpg",
+"artist": "Luke Meier",
+"license": "CC BY-SA 4.0"
+},
+"old_lamp": {
+"zh": "煤油燈",
+"title": "Kerosene lamp",
+"file": "A_kerosene_lamp_produced_by_the_factory_of_Karlskrona_Lampfabrik_in_Sweden_c._1890s.jpg",
+"artist": "Svante.tiren",
+"license": "CC0"
+},
+"old_abacus": {
+"zh": "算盤",
+"title": "Abacus",
+"file": "Abacus_(PSF).png",
+"artist": "Pearson Scott Foresman",
+"license": "Public domain"
+},
+"old_copter": {
+"zh": "竹蜻蜓",
+"title": "bamboo dragonfly toy taketombo",
+"file": "Taketombo.JPG",
+"artist": "Haragayato",
+"license": "CC BY-SA 2.5"
+},
+"old_top": {
+"zh": "陀螺",
+"title": "Spinning top",
+"file": "A_tough_gang_of_Spinning_Tops_(cropped).jpg",
+"artist": "Davidturnswood",
+"license": "CC BY-SA 3.0"
+},
+"old_typewriter": {
+"zh": "打字機",
+"title": "Typewriter",
+"file": "MEK_II-371.jpg",
+"artist": "GodeNehler",
+"license": "CC BY-SA 4.0"
+},
+"old_cassette": {
+"zh": "錄音帶",
+"title": "Cassette tape",
+"file": "Compactcassette.jpg",
+"artist": "Thegreenj",
+"license": "CC BY-SA 3.0"
+},
+"old_washboard": {
+"zh": "洗衣板",
+"title": "Washboard (laundry)",
+"file": "PikiWiki_Israel_27878_The_Religious_Kibbutz_Movement.jpg",
+"artist": "אין מידע",
+"license": "Public domain"
+},
+"old_hat": {
+"zh": "斗笠",
+"title": "Asian conical hat",
+"file": "Paddy_Field_Farmer_A.JPG",
+"artist": "ESCapade",
+"license": "CC BY-SA 3.0"
+},
+"old_pole": {
+"zh": "扁擔",
+"title": "Carrying pole",
+"file": "Shoulder_pole_01.jpg",
+"artist": "Anna Frodesiak",
+"license": "CC0"
+},
+"bird_dove": {
+"zh": "珠頸斑鳩",
+"title": "Spotted dove",
+"file": "Spilopelia_chinensis_Zhengzhou_20220915,_crop.jpg",
+"artist": "iNaturalist/zinogre",
+"license": "CC BY-SA 4.0"
+},
+"bird_swallow": {
+"zh": "家燕",
+"title": "Barn swallow",
+"file": "Rauchschwalbe_Hirundo_rustica.jpg",
+"artist": "Andreas Trepte",
+"license": "CC BY-SA 2.5"
+},
+"bird_drongo": {
+"zh": "大卷尾（烏秋）",
+"title": "Black drongo",
+"file": "Bdrongo-Sandeep1.jpg",
+"artist": "Swardeepak",
+"license": "CC BY-SA 4.0"
+},
+"bug_cicada": {
+"zh": "蟬",
+"title": "Cicada",
+"file": "Cicada_-_Neotibicen_linnei,_Woodbridge,_Virginia.jpg",
+"artist": "Judy Gallagher",
+"license": "CC BY 2.0"
+},
+"bug_mantis": {
+"zh": "螳螂",
+"title": "Mantis religiosa",
+"file": "European_praying_mantis_(Mantis_religiosa)_green_female_Dobruja.jpg",
+"artist": "Charles J. Sharp",
+"license": "CC BY-SA 4.0"
+},
+"bug_ladybug": {
+"zh": "瓢蟲",
+"title": "Coccinella septempunctata",
+"file": "7-Spotted-Ladybug-Coccinella-septempunctata-sq1.jpg",
+"artist": "Photographer: Dominik Stodulski   Graphic Processing: User:MathKnight",
+"license": "CC BY-SA 3.0"
+},
+"bug_bee": {
+"zh": "蜜蜂",
+"title": "Western honey bee",
+"file": "Apis_mellifera_Western_honey_bee.jpg",
+"artist": "Andreas Trepte",
+"license": "CC BY-SA 2.5"
+},
+"bug_ant": {
+"zh": "螞蟻",
+"title": "Ant",
+"file": "Red_Ant_-_March_2025.jpg",
+"artist": "Samantha Henneke from Seagrove, North Carolina, USA",
+"license": "CC BY 2.0"
+},
+"bug_grasshopper": {
+"zh": "蚱蜢",
+"title": "Grasshopper",
+"file": "American_Bird_Grasshopper.jpg",
+"artist": "http://www.birdphotos.com",
+"license": "CC BY 3.0"
+},
+"bug_silkworm": {
+"zh": "蠶寶寶",
+"title": "Bombyx mori larva",
+"file": "Guselena y Gussi -Los gusanos de seda (Bombyx mori) de Javier y Oscar (8880058710).jpg",
+"artist": "jacilluch",
+"license": "CC BY-SA 2.0"
+},
+"bug_leafbutterfly": {
+"zh": "枯葉蝶",
+"title": "Kallima inachus",
+"file": "Kallima_inachus_at_Gunma_Insect_World.jpg",
+"artist": "岡部碩道",
+"license": "Public domain"
+},
+"bug_birdwing": {
+"zh": "黃裳鳳蝶",
+"title": "Troides aeacus",
+"file": "Golden_birdwing_(Troides_aeacus)_male_Bach_Ma.jpg",
+"artist": "Charles J. Sharp",
+"license": "CC BY-SA 4.0"
+},
+"place_yehliu": {
+"zh": "野柳女王頭",
+"title": "Yehliu",
+"file": "20190415_Yehliu_geopark_rock_formations-1.jpg",
+"artist": "Balon Greyjoy",
+"license": "CC0"
+},
+"place_jiufen": {
+"zh": "九份老街",
+"title": "Jiufen",
+"file": "A-mei_Tea_House.jpg",
+"artist": "lumoplank",
+"license": "CC0"
+},
+"place_cks": {
+"zh": "中正紀念堂",
+"title": "Chiang Kai-shek Memorial Hall",
+"file": "Chiang_Kai-shek_memorial_amk.jpg",
+"artist": "AngMoKio",
+"license": "CC BY-SA 3.0"
+},
+"place_eluanbi": {
+"zh": "鵝鑾鼻燈塔",
+"title": "Eluanbi Lighthouse",
+"file": "Eluanbi_Lighthouse_02.jpg",
+"artist": "Bernard Gagnon",
+"license": "CC BY-SA 3.0"
+},
+"place_85": {
+"zh": "高雄85大樓",
+"title": "85 Sky Tower",
+"file": "Kaohsiung_Taiwan_Kaohsiung-85-Building-01.jpg",
+"artist": "CEphoto, Uwe Aranas",
+"license": "CC BY-SA 3.0"
+},
+"place_chihkan": {
+"zh": "赤崁樓",
+"title": "Fort Provintia",
+"file": "Chihkan_Tower_03171.jpg",
+"artist": "No machine-readable author provided. Winertai assumed (based on copyright claims",
+"license": "CC BY-SA 3.0"
+},
+"place_longshan": {
+"zh": "艋舺龍山寺",
+"title": "Mengjia Longshan Temple",
+"file": "Bangka_Lungshan_Temple_07.23.jpg",
+"artist": "This Photo was taken by Supanut Arunoprayote.\n\nFeel free to use any of my images",
+"license": "CC BY 4.0"
+},
+"place_qingshui": {
+"zh": "清水斷崖",
+"title": "Qingshui Cliff",
+"file": "Taiwan_2009_CingShui_Cliffs_on_SuHua_Highway_FRD_6762_Pano_Extracted.jpg",
+"artist": "Fred Hsu",
+"license": "CC BY-SA 3.0"
+},
+"place_sanxiantai": {
+"zh": "三仙台",
+"title": "Sanxiantai",
+"file": "Sansiantai_Bridge_01.jpg",
+"artist": "Bernard Gagnon",
+"license": "CC BY-SA 3.0"
+},
+"old_phone": {
+"zh": "轉盤電話",
+"title": "Rotary dial",
+"file": "Rotarydial.JPG",
+"artist": "R Sull / Dhscommtech at English Wikipedia",
+"license": "CC BY-SA 3.0"
+},
+"farm_bittermelon": {
+"zh": "苦瓜",
+"title": "Momordica charantia fruit",
+"file": "Momordica charantia 22052014.jpg",
+"artist": "Joydeep",
+"license": "CC BY-SA 3.0"
+},
+"farm_luffa": {
+"zh": "絲瓜",
+"title": "Luffa",
+"file": "Luffa_aegyptica.jpg",
+"artist": "‘Uncle Carl’ (カールおじさん).",
+"license": "CC BY-SA 3.0"
+},
+"farm_cabbage": {
+"zh": "高麗菜",
+"title": "Cabbage",
+"file": "Cabbage_and_cross_section_on_white.jpg",
+"artist": "fir0002  flagstaffotos [at] gmail.com\n\t\tCanon 20D + Sigma 150mm f/2.8",
+"license": "GFDL 1.2"
+},
+"farm_guava": {
+"zh": "芭樂",
+"title": "Guava",
+"file": "Guava_pink_fruit.jpg",
+"artist": "Ivar Leidus",
+"license": "CC BY-SA 4.0"
+},
+"farm_waxapple": {
+"zh": "蓮霧",
+"title": "wax apple fruit Syzygium samarangense",
+"file": "Wax apple (Syzygium samarangense).jpg",
+"artist": "Salil Kumar Mukherjee",
+"license": "CC BY-SA 4.0"
+},
+"farm_pineapple": {
+"zh": "鳳梨",
+"title": "Pineapple",
+"file": "കൈതച്ചക്ക.jpg",
+"artist": "Suniltg at Malayalam Wikipedia",
+"license": "CC BY 3.0"
+},
+"farm_sugarapple": {
+"zh": "釋迦",
+"title": "Sugar-apple",
+"file": "Sugar_apple_on_tree.jpg",
+"artist": "Muhammad Mahdi Karim",
+"license": "GFDL 1.2"
+},
+"farm_pitaya": {
+"zh": "火龍果",
+"title": "Pitaya",
+"file": "Pitaya_cross_section_ed2.jpg",
+"artist": "SMasters",
+"license": "CC BY-SA 3.0"
+},
+"farm_lychee": {
+"zh": "荔枝",
+"title": "Lychee",
+"file": "Litchi_chinensis_fruits.JPG",
+"artist": "B.navez",
+"license": "CC BY-SA 3.0"
+},
+"bird_pheasant": {
+"zh": "帝雉",
+"title": "Mikado pheasant",
+"file": "Mikado_Pheasant_398.jpg",
+"artist": "Snowyowls (photographer) / Jako (uploader)",
+"license": "CC BY-SA 3.0"
+},
+"place_palace": {
+"zh": "故宮博物院",
+"title": "National Palace Museum",
+"file": "NationalPalace_MuseumFrontView.jpg",
+"artist": "Peellden",
+"license": "CC BY 3.0"
+},
+"farm_longan": {
+"zh": "龍眼",
+"title": "Dimocarpus longan fruits",
+"file": "Dimocarpus longan fruits.jpg",
+"artist": "",
+"license": "Public domain"
+},
+"farm_starfruit": {
+"zh": "楊桃",
+"title": "Carambola",
+"file": "Averrhoa_carambola_ARS_k5735-7.jpg",
+"artist": "",
+"license": "Public domain"
+},
+"farm_mango": {
+"zh": "芒果",
+"title": "Mango",
+"file": "Mangos_-_single_and_halved.jpg",
+"artist": "Ivar Leidus",
+"license": "CC BY-SA 4.0"
+},
+"farm_peanut": {
+"zh": "花生",
+"title": "peanuts in shell",
+"file": "Peanuts in their shells.jpg",
+"artist": "TorbeyCharbel",
+"license": "CC BY 4.0"
+},
+"bird_spoonbill": {
+"zh": "黑面琵鷺",
+"title": "Black-faced spoonbill",
+"file": "Black_faced_spoonbill_at_Niigata.JPG",
+"artist": "Cp9asngf",
+"license": "CC BY-SA 3.0"
+},
+"bird_mallard": {
+"zh": "綠頭鴨",
+"title": "Mallard",
+"file": "Anas_platyrhynchos_male_female_quadrat.jpg",
+"artist": "This picture was realized by Richard Bartz by using a Canon EF 70-300mm f/4-5.6 ",
+"license": "CC BY-SA 2.5"
+},
+"bird_myna": {
+"zh": "八哥",
+"title": "Crested myna",
+"file": "Crested_myna,_Osaka,_Japan.jpg",
+"artist": "Laitche",
+"license": "CC BY-SA 4.0"
+},
+"bird_pigeon": {
+"zh": "鴿子",
+"title": "Rock dove",
+"file": "Columba_livia_(Rock_Dove,_wild),_Duncansby_Head,_Caithness,_Scotland_1.jpg",
+"artist": "william_stephens",
+"license": "CC BY 4.0"
+},
+"bug_cabbagewhite": {
+"zh": "紋白蝶",
+"title": "Pieris rapae",
+"file": "Pieris.rapae.mounted.jpg",
+"artist": "Sarefo",
+"license": "CC BY-SA 3.0"
+},
+"bug_dragonfly": {
+"zh": "蜻蜓",
+"title": "Orthetrum sabina",
+"file": "Slender_skimmer_(Orthetrum_sabina)_male_Cyprus.jpg",
+"artist": "Charles J. Sharp",
+"license": "CC BY-SA 4.0"
+},
+"bug_firefly": {
+"zh": "螢火蟲",
+"title": "Firefly",
+"file": "Photuris_lucicrescens.jpg",
+"artist": "Bruce Marlin",
+"license": "CC BY-SA 2.5"
+},
+"bug_beetle": {
+"zh": "獨角仙",
+"title": "Trypoxylus dichotomus",
+"file": "Kabutomushi-JapaneseBeetle-July2004.jpg",
+"artist": "Gombe at Japanese Wikipedia",
+"license": "CC BY-SA 3.0"
+},
+"bug_stag": {
+"zh": "鍬形蟲",
+"title": "Lucanus cervus",
+"file": "Lucanus_cervus.jpg",
+"artist": "J.F. Gaffard",
+"license": "CC BY-SA 3.0"
+},
+"bug_cricket": {
+"zh": "蟋蟀",
+"title": "Gryllus bimaculatus",
+"file": "African.field.cricket.arp.jpg",
+"artist": "Arpingstone",
+"license": "Public domain"
+},
+"bug_stick": {
+"zh": "竹節蟲",
+"title": "Phasmatodea",
+"file": "Le_Caylar_fg01.JPG",
+"artist": "Fritz Geller-Grimm and Felix Grimm",
+"license": "CC BY-SA 2.5"
+},
+"bug_strider": {
+"zh": "水黽",
+"title": "Gerridae",
+"file": "Water_strider_(Gerridae_sp.)_Makiling.jpg",
+"artist": "Charles J. Sharp",
+"license": "CC BY-SA 4.0"
+},
+"bug_hornet": {
+"zh": "虎頭蜂",
+"title": "Vespa mandarinia",
+"file": "20200512-P1100071_Vespa_mandarinia_japonica.jpg",
+"artist": "Yasunori Koide",
+"license": "CC BY-SA 4.0"
+},
+"place_101": {
+"zh": "台北101",
+"title": "Taipei 101 skyline",
+"file": "Taipei 101 sunset skyline 2015.jpg",
+"artist": "中岑 范姜 from Taipei, Taiwan, Republic of China",
+"license": "CC BY-SA 2.0"
+},
+"place_sunmoon": {
+"zh": "日月潭",
+"title": "Sun Moon Lake Lalu island",
+"file": "Lalu Island 2015-02-10.jpg",
+"artist": "S099001",
+"license": "CC0"
+},
+"place_alishan": {
+"zh": "阿里山",
+"title": "Alishan National Scenic Area",
+"file": "Alishan,_Part_IV_-_Alishan5348.jpg",
+"artist": "lumoplank",
+"license": "CC0"
+},
+"place_taroko": {
+"zh": "太魯閣",
+"title": "Taroko National Park",
+"file": "Taroko_Gorge4.jpg",
+"artist": "lumoplank",
+"license": "CC0"
+},
+"place_redfort": {
+"zh": "淡水紅毛城",
+"title": "Fort San Domingo",
+"file": "Fort_Santo_Domingo,_New_Taipei,_Jan_2025_(3).jpg",
+"artist": "Ralff Nestor Nacor",
+"license": "CC BY-SA 4.0"
+},
+"place_wharf": {
+"zh": "淡水漁人碼頭",
+"title": "Tamsui Fisherman's Wharf",
+"file": "Tamsui_Fisherman's_Wharf_2012.jpg",
+"artist": "MiNe",
+"license": "CC BY 2.0"
+},
+"place_tamsuichurch": {
+"zh": "淡水禮拜堂",
+"title": "Tamsui Church",
+"file": "Tamsui_church.JPG",
+"artist": "Diahf42",
+"license": "CC BY-SA 3.0"
+},
+"place_guandu": {
+"zh": "關渡大橋",
+"title": "Guandu Bridge",
+"file": "MED-IMG-0471.jpg",
+"artist": "Mochimoshi",
+"license": "CC BY 4.0"
+},
+"old_record": {
+"zh": "黑膠唱片",
+"title": "Phonograph record",
+"file": "Vinilos_distintos_tamaños.jpg",
+"artist": "Banfield",
+"license": "CC BY-SA 3.0"
+},
+"old_ramune": {
+"zh": "彈珠汽水",
+"title": "Ramune",
+"file": "Ramune-lemonade,japan.JPG",
+"artist": "katorisi",
+"license": "CC BY 3.0"
+},
+"old_radio": {
+"zh": "收音機",
+"title": "Transistor radio",
+"file": "Emerson_Model_888_Pioneer_8-Transistor_AM_Radio,_Made_in_the_USA,_Circa_1958_(21973868670).jpg",
+"artist": "Joe Haupt from USA",
+"license": "CC BY-SA 2.0"
+},
+"old_thermos": {
+"zh": "熱水瓶",
+"title": "Vacuum flask",
+"file": "Thermos.JPG",
+"artist": "Denae Bedard",
+"license": "CC BY-SA 3.0"
+},
+"farm_shoot": {
+"zh": "竹筍",
+"title": "Bamboo shoot",
+"file": "Bamboo_sprout2.JPG",
+"artist": "Haragayato",
+"license": "CC BY-SA 2.5"
+},
+"farm_sweetpotato": {
+"zh": "地瓜",
+"title": "Sweet potato",
+"file": "Ipomoea_batatas_006.JPG",
+"artist": "Llez",
+"license": "CC BY-SA 3.0"
+},
+"farm_taro": {
+"zh": "芋頭",
+"title": "Taro",
+"file": "Songe-Réunion.JPG",
+"artist": "No machine-readable author provided. Thierry Caro assumed (based on copyright cl",
+"license": "CC BY-SA 2.5"
+},
+"farm_wildrice": {
+"zh": "茭白筍",
+"title": "Zizania latifolia stem vegetable",
+"file": "Peeled wild rice stem - Jiaobai.jpg",
+"artist": "Fumikas Sagisavas",
+"license": "CC0"
+},
+"place_anping": {
+"zh": "安平古堡",
+"title": "Fort Zeelandia (Taiwan)",
+"file": "Fort_Zeelandia,_Anping_District,_Tainan_City_(Taiwan).jpg",
+"artist": "",
+"license": "CC BY-SA 4.0"
+},
+"place_kenting": {
+"zh": "墾丁",
+"title": "Kenting National Park",
+"file": "Maobitou_Cape_01.jpg",
+"artist": "Bernard Gagnon",
+"license": "CC BY-SA 3.0"
+},
+"place_grandhotel": {
+"zh": "圓山大飯店",
+"title": "Grand Hotel (Taipei)",
+"file": "Yuanshan_Great_Hotel_(Grand_Hotel)_in_Taipei.jpg",
+"artist": "Photographer: Mosbatho",
+"license": "CC BY 4.0"
+},
+"place_lotus": {
+"zh": "蓮池潭龍虎塔",
+"title": "Dragon and Tiger Pagodas",
+"file": "Dragon_and_Tiger_Pagodas_02.jpg",
+"artist": "Bernard Gagnon",
+"license": "CC BY-SA 3.0"
+},
+"old_ricecooker": {
+"zh": "大同電鍋",
+"title": "Tatung rice cooker",
+"file": "Tatung TAC-10L-SI and Zojirushi CD-LCF50-WG on the table 20151020.jpg",
+"artist": "Solomon203",
+"license": "CC BY-SA 4.0"
+},
+"old_steamer": {
+"zh": "蒸籠",
+"title": "Bamboo steamer",
+"file": "Bamboo_steamer-top_oblique-fs_PNr°0727.jpg",
+"artist": "D-Kuru",
+"license": "CC BY-SA 4.0"
+},
+"old_iron": {
+"zh": "炭火熨斗",
+"title": "charcoal iron antique",
+"file": "Still Life with Antique Iron on Street - Abomey - Benin.jpg",
+"artist": "Adam Jones, Ph.D.",
+"license": "CC BY-SA 3.0"
+}
+}

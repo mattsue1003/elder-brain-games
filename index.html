@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>樂齡動腦遊戲館</title>
+<meta name="description" content="長者互動遊戲：懷舊猜歌、猜圖、猜景點、猜鳥、猜昆蟲、猜蔬果，加上翻牌記憶、顏色字、數字順序等認知遊戲。">
+<meta name="theme-color" content="#f6f1e7">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="動腦遊戲館">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f6f1e7;--card:#fffdf8;--ink:#2b2622;--ink2:#5d554d;--line:#e3d9c6;
+  --rose:#b9545f;--blue:#3b64a0;--ochre:#9c7720;--plum:#6e4f9e;--leaf:#3f7a5a;
+  --ok:#2f7d4f;--no:#b23a3a;--fs:1;
+  --shadow:0 1px 2px rgba(60,40,20,.08),0 6px 18px rgba(60,40,20,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:"Noto Sans TC",system-ui,sans-serif;font-size:calc(22px*var(--fs));line-height:1.55;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .3 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  min-height:100vh;-webkit-tap-highlight-color:transparent}
+h1,h2,h3,.wk{font-family:"LXGW WenKai TC","Noto Sans TC",serif;font-weight:700;letter-spacing:.02em}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--blue)}
+.wrap{max-width:1180px;margin:0 auto;padding:16px 16px 120px}
+/* top bar */
+.bar{position:sticky;top:0;z-index:20;background:rgba(246,241,231,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.bar .in{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:10px 16px}
+.bar .ttl{font-family:"LXGW WenKai TC",serif;font-size:1.15em;font-weight:700;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill{border:2px solid var(--ink);background:var(--card);border-radius:999px;padding:6px 16px;font-size:.8em;font-weight:700;min-height:48px;display:inline-flex;align-items:center;gap:6px}
+.pill.ghost{border-color:var(--line)}
+.pill.on{background:var(--ink);color:var(--paper)}
+/* hero */
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:28px;align-items:center;margin:18px 0 28px}
+.hero h1{font-size:2.6em;line-height:1.15;margin:0 0 10px}
+.hero p{color:var(--ink2);margin:0 0 14px}
+.tape{display:inline-block;background:rgba(156,119,32,.18);padding:2px 12px;transform:rotate(-1.5deg);font-weight:700;font-size:.8em;margin-bottom:10px}
+.collage{position:relative;height:250px}
+.collage img{position:absolute;width:48%;aspect-ratio:4/3;object-fit:cover;border:8px solid #fff;box-shadow:var(--shadow);border-radius:3px}
+.collage img:nth-child(1){left:0;top:10px;transform:rotate(-5deg)}
+.collage img:nth-child(2){right:0;top:0;transform:rotate(4deg)}
+.collage img:nth-child(3){left:26%;top:100px;transform:rotate(-1deg);z-index:2}
+.sec{display:flex;align-items:baseline;gap:12px;margin:30px 0 14px;border-bottom:2px solid var(--ink);padding-bottom:6px}
+.sec h2{margin:0;font-size:1.5em}
+.sec span{color:var(--ink2);font-size:.8em}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.gcard{background:var(--card);border:1px solid var(--line);border-radius:6px;box-shadow:var(--shadow);text-align:left;padding:0;overflow:hidden;display:flex;flex-direction:column;transition:transform .15s}
+.gcard:hover{transform:translateY(-3px)}
+.gcard .ph{height:150px;background:#eee center/cover;position:relative}
+.gcard .ph .em{position:absolute;inset:0;display:grid;place-items:center;font-size:70px}
+.gcard .bd{padding:12px 16px 16px;border-top:5px solid var(--c,#333)}
+.gcard h3{margin:0;font-size:1.25em}
+.gcard p{margin:2px 0 0;color:var(--ink2);font-size:.75em}
+.gcard .tag{display:inline-block;font-size:.62em;font-weight:700;color:var(--c);border:1.5px solid var(--c);border-radius:999px;padding:0 10px;margin-top:8px}
+/* game screen */
+.stage{background:var(--card);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:22px;margin-top:16px}
+.ghead{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px}
+.ghead h2{margin:0;font-size:1.5em}
+.score{font-family:"LXGW WenKai TC",serif;font-size:1.1em;font-weight:700}
+.score b{color:var(--rose);font-size:1.3em}
+.progress{height:10px;background:#eee4d2;border-radius:99px;overflow:hidden;margin-bottom:16px}
+.progress i{display:block;height:100%;background:var(--ink);transition:width .3s}
+.qwrap{display:grid;grid-template-columns:1.25fr 1fr;gap:22px;align-items:start}
+.photo{position:relative;border:10px solid #fff;box-shadow:var(--shadow);border-radius:3px;overflow:hidden;aspect-ratio:4/3;background:#ddd}
+.photo img{width:100%;height:100%;object-fit:cover;display:block;transition:filter .5s,transform .5s}
+.photo .peep{position:absolute;inset:0;pointer-events:none}
+.revealbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.qtitle{font-size:1.35em;margin:0 0 12px;font-family:"LXGW WenKai TC",serif;font-weight:700}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.opt{background:#fff;border:3px solid var(--ink);border-radius:10px;min-height:86px;font-size:1.3em;font-weight:900;padding:8px;line-height:1.2}
+.opt:hover{background:#faf5ea}
+.opt.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.opt.no{background:var(--no);border-color:var(--no);color:#fff;opacity:.85}
+.opt:disabled{cursor:default}
+.ans{margin-top:16px;padding:16px 18px;background:#fbf6ea;border-left:6px solid var(--ochre);border-radius:4px;display:none}
+.ans.show{display:block;animation:pop .35s}
+.ans .nm{font-family:"LXGW WenKai TC",serif;font-size:1.6em;font-weight:700}
+.ans .alt{font-size:.8em;color:var(--ink2)}
+.ans .talk{margin-top:8px;font-weight:700;color:var(--plum)}
+.ans .talk::before{content:"💬 聊一聊：";color:var(--ink2);font-weight:500}
+.navrow{display:flex;gap:12px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
+.big{background:var(--ink);color:var(--paper);border:0;border-radius:999px;font-size:1.1em;font-weight:900;padding:12px 30px;min-height:60px}
+.big.alt{background:var(--card);color:var(--ink);border:2px solid var(--ink)}
+@keyframes pop{0%{transform:scale(.96);opacity:0}100%{transform:none;opacity:1}}
+.flash{position:fixed;inset:0;pointer-events:none;z-index:50;opacity:0}
+.flash.g{background:rgba(47,125,79,.18);animation:fl .6s}
+.flash.r{background:rgba(178,58,58,.15);animation:fl .6s}
+@keyframes fl{0%{opacity:1}100%{opacity:0}}
+.stamp{position:fixed;left:50%;top:40%;transform:translate(-50%,-50%) rotate(-8deg);font-family:"LXGW WenKai TC",serif;font-size:90px;font-weight:700;color:var(--ok);border:8px solid var(--ok);border-radius:16px;padding:0 28px;background:rgba(255,253,248,.9);z-index:60;pointer-events:none;animation:st .9s forwards}
+.stamp.no{color:var(--no);border-color:var(--no)}
+@keyframes st{0%{opacity:0;transform:translate(-50%,-50%) rotate(-8deg) scale(2)}25%{opacity:1;transform:translate(-50%,-50%) rotate(-8deg) scale(1)}80%{opacity:1}100%{opacity:0}}
+/* chooser */
+.choose{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.choose button{background:#fff;border:2px solid var(--line);border-radius:8px;padding:14px;text-align:left;min-height:84px}
+.choose button b{display:block;font-size:1.1em}
+.choose button span{font-size:.72em;color:var(--ink2)}
+.choose button:hover{border-color:var(--ink)}
+.lvl{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 16px}
+/* player */
+.player{display:flex;align-items:center;gap:16px;background:#fbf6ea;border-radius:12px;padding:16px;margin-bottom:12px}
+.playbtn{width:96px;height:96px;border-radius:50%;border:0;background:var(--rose);color:#fff;font-size:44px;flex:none;box-shadow:var(--shadow)}
+.playbtn.on{background:var(--ink)}
+.pbar{height:12px;background:#eadfca;border-radius:99px;overflow:hidden;margin-top:8px}
+.pbar i{display:block;height:100%;width:0;background:var(--rose)}
+.hint{background:#fff;border:2px dashed var(--line);border-radius:8px;padding:10px 14px;margin:8px 0;display:none}
+.hint.show{display:block}
+/* memory */
+.mem{display:grid;gap:12px;margin:0 auto;max-width:900px}
+.mc{aspect-ratio:1;perspective:800px;border:0;background:none;padding:0}
+.mc .in{position:relative;width:100%;height:100%;transition:transform .45s;transform-style:preserve-3d}
+.mc.f .in{transform:rotateY(180deg)}
+.mc .fr,.mc .bk{position:absolute;inset:0;backface-visibility:hidden;border-radius:10px;box-shadow:var(--shadow)}
+.mc .bk{background:var(--ink);display:grid;place-items:center;color:var(--paper);font-family:"LXGW WenKai TC",serif;font-size:2em;
+  background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.06) 0 8px,transparent 8px 16px)}
+.mc .fr{transform:rotateY(180deg);background:#fff center/cover;border:5px solid #fff}
+.mc .fr span{position:absolute;left:0;right:0;bottom:0;background:rgba(255,253,248,.92);font-size:.7em;font-weight:700;text-align:center}
+.mc.done .fr{outline:4px solid var(--ok)}
+/* stroop */
+.stroopword{font-size:150px;font-weight:900;text-align:center;line-height:1.1;margin:10px 0 20px;font-family:"Noto Sans TC"}
+.colorbtns{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.colorbtns button{min-height:90px;border-radius:12px;border:0;color:#fff;font-size:1.3em;font-weight:900;box-shadow:var(--shadow)}
+/* numbers */
+.numgrid{display:grid;gap:10px;max-width:640px;margin:0 auto}
+.numgrid button{aspect-ratio:1;border-radius:10px;border:3px solid var(--ink);background:#fff;font-size:2em;font-weight:900;font-family:"Noto Sans TC"}
+.numgrid button.done{background:var(--ok);border-color:var(--ok);color:#fff}
+.numgrid button.bad{animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+/* odd */
+.oddgrid{display:grid;gap:8px;max-width:640px;margin:0 auto}
+.oddgrid button{aspect-ratio:1;border:2px solid var(--line);background:#fff;border-radius:10px;font-size:min(9vw,56px);padding:0}
+/* market */
+.basket{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:8px 0 16px}
+.goods{background:#fff;border:2px solid var(--line);border-radius:12px;padding:10px 18px;text-align:center;min-width:150px}
+.goods .e{font-size:64px;line-height:1.1}
+.goods .p{font-weight:900;color:var(--rose);font-size:1.1em}
+.coins{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.coin{width:78px;height:78px;border-radius:50%;display:grid;place-items:center;font-weight:900;background:radial-gradient(circle at 35% 30%,#fff3c8,#d7b25a);border:3px solid #a8822e;color:#5c4210}
+.bill{width:130px;height:66px;border-radius:6px;display:grid;place-items:center;font-weight:900;background:#e8d9f5;border:3px solid #7d5ea8;color:#3d2a5c}
+/* list memory */
+.recall{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.recall button{background:#fff;border:3px solid var(--line);border-radius:10px;padding:8px;font-size:.9em;font-weight:700}
+.recall button .e{font-size:54px;display:block}
+.recall button.sel{border-color:var(--blue);background:#eef3fb}
+.recall button.ok{border-color:var(--ok);background:#e8f4ec}
+.recall button.no{border-color:var(--no);background:#fbeaea}
+.recall button.miss{border-style:dashed;border-color:var(--ok)}
+.countdown{font-size:1.2em;font-weight:900;color:var(--rose)}
+/* result */
+.result{text-align:center;padding:20px}
+.result .stars{font-size:70px;letter-spacing:6px}
+.result h2{font-size:2em;margin:6px 0}
+/* credits */
+.cred{font-size:.6em;color:var(--ink2);columns:2;column-gap:30px}
+.cred div{break-inside:avoid;margin-bottom:4px}
+footer{font-size:.65em;color:var(--ink2);text-align:center;margin-top:40px}
+.hide{display:none!important}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 22px;border-radius:999px;z-index:80;font-size:.85em}
+body.embed .bar .home-only{display:none}
+@media (max-width:820px){
+  body{font-size:calc(19px*var(--fs))}
+  .hero{grid-template-columns:1fr}.collage{height:200px}
+  .hero h1{font-size:2em}
+  .qwrap{grid-template-columns:1fr}
+  .opt{min-height:70px;font-size:1.15em}
+  .stroopword{font-size:96px}
+  .colorbtns{grid-template-columns:repeat(2,1fr)}
+  .cred{columns:1}
+  .stage{padding:14px}
+  .bar .pill{padding:6px 12px}
+}
+</style>
+</head>
+<body>
+<div class="bar"><div class="in">
+  <button class="pill ghost" id="homeBtn" aria-label="回首頁">🏠 首頁</button>
+  <div class="ttl" id="barTitle">樂齡動腦遊戲館</div>
+  <button class="pill ghost" id="fsBtn" title="字變大">字 大</button>
+  <button class="pill ghost" id="sndBtn" title="音效">🔔</button>
+  <button class="pill ghost" id="fullBtn" title="全螢幕">⛶</button>
+</div></div>
+<div class="flash" id="flash"></div>
+<main class="wrap" id="app"></main>
+
+<script src="data.js"></script>
+<script src="songs.js"></script>
+<script>
+const $=s=>document.querySelector(s), app=$("#app");
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const pick=(a,n)=>shuffle(a).slice(0,n);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const img=(cat,slug)=>`img/${cat}_${slug}.jpg`;
+let sound=true, fs=1;
+try{fs=+localStorage.getItem("ld-fs")||1;sound=localStorage.getItem("ld-snd")!=="0"}catch(e){}
+document.documentElement.style.setProperty("--fs",fs);
+if(new URLSearchParams(location.search).has("embed"))document.body.classList.add("embed");
+
+/* ---------- 音效 ---------- */
+let actx=null;
+function beep(ok){
+  if(!sound)return;
+  try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+    const notes=ok?[523,659,784]:[330,262];
+    notes.forEach((f,i)=>{const o=actx.createOscillator(),g=actx.createGain();o.type="triangle";o.frequency.value=f;
+      g.gain.setValueAtTime(.0001,actx.currentTime+i*.11);g.gain.exponentialRampToValueAtTime(.25,actx.currentTime+i*.11+.02);
+      g.gain.exponentialRampToValueAtTime(.0001,actx.currentTime+i*.11+.3);o.connect(g).connect(actx.destination);o.start(actx.currentTime+i*.11);o.stop(actx.currentTime+i*.11+.32)});
+  }catch(e){}
+}
+function feedback(ok,txt){
+  beep(ok);const f=$("#flash");f.className="flash";void f.offsetWidth;f.className="flash "+(ok?"g":"r");
+  const s=document.createElement("div");s.className="stamp"+(ok?"":" no");s.textContent=txt||(ok?"答對了！":"再想想");
+  document.body.appendChild(s);setTimeout(()=>s.remove(),950);
+}
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="zh-TW";u.rate=.9;speechSynthesis.speak(u)}catch(e){}}
+function toast(t){const d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),1800)}
+
+$("#fsBtn").onclick=()=>{fs=fs>=1.3?1:+(fs+.15).toFixed(2);document.documentElement.style.setProperty("--fs",fs);try{localStorage.setItem("ld-fs",fs)}catch(e){};toast(fs===1?"字體：標準":"字體放大 "+Math.round(fs*100)+"%")};
+$("#sndBtn").onclick=()=>{sound=!sound;$("#sndBtn").textContent=sound?"🔔":"🔕";try{localStorage.setItem("ld-snd",sound?"1":"0")}catch(e){};toast(sound?"音效開":"音效關")};
+$("#sndBtn").textContent=sound?"🔔":"🔕";
+$("#fullBtn").onclick=()=>{const d=document;if(!d.fullscreenElement)(d.documentElement.requestFullscreen||d.documentElement.webkitRequestFullscreen||(()=>{})).call(d.documentElement);else d.exitFullscreen&&d.exitFullscreen()};
+if(!(document.documentElement.requestFullscreen||document.documentElement.webkitRequestFullscreen))$("#fullBtn").classList.add("hide");
+$("#homeBtn").onclick=()=>{location.hash=""};
+
+/* ---------- 遊戲目錄 ---------- */
+const GAMES=[
+ {id:"song",grp:"old",name:"猜歌",desc:"聽 15 秒前奏猜歌名，國台語老歌 160 首",em:"🎵",c:"#b9545f",ph:null},
+ {id:"pic-old",grp:"old",name:"猜懷舊物品",desc:"照片慢慢變清楚，猜猜這是什麼",c:"#b9545f",ph:img("old","radio")},
+ {id:"pic-place",grp:"old",name:"猜景點",desc:"台灣走透透，淡水景點也在裡面",c:"#9c7720",ph:img("place","redfort")},
+ {id:"pic-bird",grp:"old",name:"猜鳥",desc:"18 種台灣常見的鳥，附台語名",c:"#3b64a0",ph:img("bird","bluemagpie")},
+ {id:"pic-bug",grp:"old",name:"猜昆蟲",desc:"田邊草叢的小朋友",c:"#6e4f9e",ph:img("bug","firefly")},
+ {id:"pic-farm",grp:"old",name:"猜蔬果",desc:"農會好物大考驗",c:"#3f7a5a",ph:img("farm","wildrice")},
+ {id:"saying",grp:"old",name:"台灣俗語接龍",desc:"上半句接下半句，順便聊人生",em:"📜",c:"#9c7720"},
+ {id:"memory",grp:"brain",name:"翻牌配對",desc:"記住位置，翻出一樣的兩張",em:"🃏",c:"#3b64a0",ph:img("farm","pineapple")},
+ {id:"stroop",grp:"brain",name:"顏色字",desc:"不看字，看顏色！考驗專注力",em:"🎨",c:"#b9545f"},
+ {id:"numbers",grp:"brain",name:"數字順序",desc:"從 1 開始依序點，越快越好",em:"🔢",c:"#2b2622"},
+ {id:"odd",grp:"brain",name:"找不一樣",desc:"一堆圖案裡找出不一樣的那一個",em:"🔍",c:"#6e4f9e"},
+ {id:"market",grp:"brain",name:"菜市場算錢",desc:"買菜要付多少？找多少錢？",em:"🧺",c:"#3f7a5a"},
+ {id:"shop",grp:"brain",name:"買菜記憶",desc:"記住要買的東西，再從市場挑出來",em:"📝",c:"#9c7720"},
+];
+function card(g){
+  const ph=g.ph?`style="background-image:url('${g.ph}')"`:`style="background:${g.c}18"`;
+  return `<button class="gcard" style="--c:${g.c}" onclick="location.hash='${g.id}'">
+    <div class="ph" ${ph}>${g.ph?"":`<div class="em">${g.em}</div>`}</div>
+    <div class="bd"><h3>${g.em&&g.ph?g.em+" ":""}${g.name}</h3><p>${g.desc}</p><span class="tag">${g.grp==="old"?"懷舊猜謎":"動動腦"}</span></div></button>`;
+}
+function home(){
+  $("#barTitle").textContent="樂齡動腦遊戲館";
+  app.innerHTML=`
+  <section class="hero">
+    <div><span class="tape">長者互動遊戲・大字好按</span>
+      <h1>今天想玩<br>哪一種？</h1>
+      <p>懷舊猜謎＋動腦遊戲，一共 ${GAMES.length} 種。每一題都可以停下來聊一聊，玩得慢沒關係。</p>
+      <div class="lvl"><button class="big" onclick="location.hash='random'">🎲 隨便玩一個</button><button class="big alt" onclick="document.getElementById('brain').scrollIntoView({behavior:'smooth'})">🧠 動動腦</button></div>
+    </div>
+    <div class="collage"><img src="${img("old","phone")}" alt=""><img src="${img("bird","egret")}" alt=""><img src="${img("place","wharf")}" alt=""></div>
+  </section>
+  <div class="sec"><h2>懷舊猜謎</h2><span>聽歌、看照片，喚起回憶</span></div>
+  <div class="grid">${GAMES.filter(g=>g.grp==="old").map(card).join("")}</div>
+  <div class="sec" id="brain"><h2>動動腦</h2><span>記憶、專注、反應、計算</span></div>
+  <div class="grid">${GAMES.filter(g=>g.grp==="brain").map(card).join("")}</div>
+  <footer>愛迪樂｜鍾孟修 職能治療師　·　<a href="#credits">圖片與音樂來源</a><br>可以加到手機桌面當 App 使用</footer>`;
+  scrollTo(0,0);
+}
+function shell(g,inner){
+  $("#barTitle").textContent=g.name;
+  app.innerHTML=`<div class="stage" style="border-top:6px solid ${g.c}">${inner}</div>`;
+  scrollTo(0,0);
+}
+function result(g,score,total,again){
+  const r=score/total, n=r>=.9?3:r>=.6?2:r>0?1:0;
+  shell(g,`<div class="result"><div class="stars">${"⭐".repeat(n)}${"☆".repeat(3-n)}</div>
+   <h2>${n===3?"太厲害了！":n===2?"很棒喔！":"有動腦就是最棒的！"}</h2>
+   <p class="score">答對 <b>${score}</b> / ${total}</p>
+   <div class="navrow" style="justify-content:center"><button class="big" id="again">再玩一次</button><button class="big alt" onclick="location.hash=''">回首頁</button></div></div>`);
+  $("#again").onclick=again; beep(true);
+}
+
+/* ---------- 看圖猜謎 ---------- */
+function picGame(cat){
+  const S=PICSETS[cat], g=GAMES.find(x=>x.id==="pic-"+cat);
+  const pre=()=>shell(g,`<div class="ghead"><h2>${S.icon} ${S.name}</h2></div>
+    <p>照片一開始會模糊，慢慢變清楚。越早猜出來越厲害！</p>
+    <p class="wk" style="margin-bottom:6px">要玩幾題？</p>
+    <div class="lvl">${[5,10,S.items.length].map(n=>`<button class="big ${n===10?"":"alt"}" data-n="${n}">${n===S.items.length?"全部 "+n:n} 題</button>`).join("")}</div>
+    <p class="wk" style="margin-bottom:6px">照片怎麼出現？</p>
+    <div class="lvl" id="modes"><button class="pill on" data-m="blur">慢慢變清楚</button><button class="pill" data-m="zoom">放大一角</button><button class="pill" data-m="clear">直接看</button></div>`);
+  pre();
+  let mode="blur";
+  app.querySelectorAll("#modes button").forEach(b=>b.onclick=()=>{mode=b.dataset.m;app.querySelectorAll("#modes button").forEach(x=>x.classList.toggle("on",x===b))});
+  app.querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>run(+b.dataset.n));
+  function run(n){
+    const qs=pick(S.items,n); let i=0,score=0,timer=null;
+    const q=()=>{
+      clearInterval(timer);
+      const it=qs[i], wrong=pick(S.items.filter(x=>x!==it),3), opts=shuffle([it,...wrong]);
+      shell(g,`<div class="ghead"><h2>${S.icon} ${S.name}</h2><div class="score">第 ${i+1} / ${n} 題　答對 <b>${score}</b></div></div>
+      <div class="progress"><i style="width:${i/n*100}%"></i></div>
+      <div class="qwrap"><div><div class="photo"><img id="ph" src="${img(cat,it[0])}" alt="猜猜看"></div>
+        <div class="revealbar"><button class="pill" id="clearer">🔍 再清楚一點</button><button class="pill ghost" id="showall">直接看</button></div></div>
+      <div><p class="qtitle">這是什麼？</p><div class="opts">${opts.map(o=>`<button class="opt" data-k="${o[0]}">${o[1]}</button>`).join("")}</div>
+        <div class="ans" id="ans"><div class="nm">${it[1]} ${it[2]?`<span class="alt">（台語／別名：${it[2]}）</span>`:""}</div>
+        <div>${it[3]}</div><div class="talk">${it[4]}</div>
+        <div class="navrow"><button class="pill" id="sayit">🔊 唸給我聽</button><button class="big" id="next">${i+1<n?"下一題 ➜":"看成績"}</button></div></div></div></div>`);
+      const ph=$("#ph"); let lv=mode==="clear"?0:6;
+      const apply=()=>{ if(mode==="blur")ph.style.filter=`blur(${lv*5}px)`; else if(mode==="zoom"){ph.style.transform=`scale(${1+lv*.55})`;ph.style.transformOrigin=`${30+((i*37)%40)}% ${30+((i*53)%40)}%`} };
+      apply();
+      if(mode!=="clear")timer=setInterval(()=>{if(lv>0){lv--;apply()}else clearInterval(timer)},2200);
+      $("#clearer").onclick=()=>{if(lv>0){lv--;apply()}};
+      $("#showall").onclick=()=>{lv=0;apply()};
+      if(mode==="clear")$("#clearer").parentNode.classList.add("hide");
+      app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+        const ok=b.dataset.k===it[0]; if(ok)score++;
+        app.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(x.dataset.k===it[0])x.classList.add("ok");else if(x===b)x.classList.add("no")});
+        feedback(ok); clearInterval(timer); lv=0; apply(); $("#ans").classList.add("show");
+        $(".score").innerHTML=`第 ${i+1} / ${n} 題　答對 <b>${score}</b>`;
+        setTimeout(()=>$("#ans").scrollIntoView({behavior:"smooth",block:"nearest"}),300);
+      });
+      $("#sayit").onclick=()=>say(`${it[1]}。${it[3]}${it[4]}`);
+      $("#next").onclick=()=>{i++; i<n?q():result(g,score,n,()=>run(n))};
+    };
+    q();
+  }
+}
+
+/* ---------- 猜歌（Apple 試聽片段） ---------- */
+let actx2=null,gain2=null,src2=null,bufs={},previews={},raf2=null,playing=null;
+function jsonp(url,ms){return new Promise((res,rej)=>{const cb="itcb"+Math.random().toString(36).slice(2);let done=false;
+  window[cb]=d=>{done=true;res(d);try{delete window[cb];sc.remove()}catch(e){}};const sc=document.createElement("script");sc.src=url+"&callback="+cb;
+  sc.onerror=()=>{if(!done){done=true;rej(new Error("被擋住"))}};document.head.appendChild(sc);setTimeout(()=>{if(!done){done=true;rej(new Error("逾時"))}},ms||9000)})}
+async function loadPreviews(songs){
+  const need=songs.filter(s=>!previews[s.id]).map(s=>s.id); if(!need.length)return;
+  const url="https://itunes.apple.com/lookup?id="+need.join(",")+"&country=TW&entity=song&limit=200";
+  let d; try{const r=await fetch(url);d=await r.json()}catch(e){d=await jsonp(url)}
+  (d.results||[]).forEach(x=>{if(x.previewUrl)previews[String(x.trackId)]=x.previewUrl});
+}
+function stopSong(){if(src2){try{src2.stop()}catch(e){}src2=null}cancelAnimationFrame(raf2);playing=null;const b=$("#play");if(b){b.classList.remove("on");b.textContent="▶"}}
+async function playSong(s,limit){
+  if(playing===s.id){stopSong();return}
+  stopSong();
+  const lab=$("#plabel");
+  try{
+    actx2=actx2||new (window.AudioContext||window.webkitAudioContext)(); if(actx2.state==="suspended")await actx2.resume();
+    if(!gain2){gain2=actx2.createGain();gain2.gain.value=.9;gain2.connect(actx2.destination)}
+    if(!bufs[s.id]){lab.textContent="載入中…";if(!previews[s.id])await loadPreviews([s]);if(!previews[s.id])throw new Error("找不到試聽");
+      const ab=await (await fetch(previews[s.id])).arrayBuffer();bufs[s.id]=await new Promise((r,j)=>{const p=actx2.decodeAudioData(ab,r,j);if(p&&p.then)p.then(r,j)})}
+    src2=actx2.createBufferSource();src2.buffer=bufs[s.id];src2.connect(gain2);const t0=actx2.currentTime;src2.start(0);playing=s.id;
+    $("#play").classList.add("on");$("#play").textContent="⏸";lab.textContent="播放中…";
+    const step=()=>{if(playing!==s.id)return;const el=actx2.currentTime-t0;$("#pbar").style.width=Math.min(el/limit,1)*100+"%";
+      if(el>=limit){stopSong();lab.textContent="播完了，可以再聽一次";return}raf2=requestAnimationFrame(step)};step();
+  }catch(e){stopSong();lab.innerHTML=`播不出來（${esc(e.message)}）。可改用 <a target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${encodeURIComponent(s.t+" "+s.s)}">YouTube</a>`}
+}
+function songGame(){
+  const g=GAMES.find(x=>x.id==="song");
+  shell(g,`<div class="ghead"><h2>🎵 猜歌</h2></div><p>選一組歌單。每首播 15 秒，聽前奏猜歌名，猜不出來可以看歌詞提示。</p>
+  <div class="choose">${Object.entries(SONGSETS).map(([k,v])=>`<button data-k="${k}"><b>${v.name}</b><span>${v.rng}・${v.songs.length} 首</span></button>`).join("")}</div>
+  <p style="font-size:.7em;color:var(--ink2);margin-top:14px">試聽片段由 Apple iTunes 提供，需要網路。</p>`);
+  app.querySelectorAll(".choose button").forEach(b=>b.onclick=()=>run(b.dataset.k));
+  function run(key){
+    const set=SONGSETS[key], n=10, qs=pick(set.songs,n); let i=0,score=0;
+    loadPreviews(qs).catch(()=>{});
+    const q=()=>{
+      stopSong();
+      const s=qs[i], opts=shuffle([s,...pick(set.songs.filter(x=>x!==s),3)]);
+      shell(g,`<div class="ghead"><h2>🎵 ${set.name}</h2><div class="score">第 ${i+1} / ${n} 首　答對 <b>${score}</b></div></div>
+      <div class="progress"><i style="width:${i/n*100}%"></i></div>
+      <div class="player"><button class="playbtn" id="play">▶</button><div style="flex:1"><div class="wk" id="plabel" style="font-size:1.1em">按紅色按鈕開始聽</div><div class="pbar"><i id="pbar"></i></div></div></div>
+      <div class="lvl"><button class="pill" id="h1">💡 提示一：${s.k1==="clue"?"線索":"歌詞"}</button><button class="pill" id="h2">💡 提示二：歌手</button></div>
+      <div class="hint" id="hint1">${esc(s.l1)}</div><div class="hint" id="hint2">🎤 ${esc(s.s)}（${esc(s.y)}）</div>
+      <p class="qtitle">這首歌是？</p>
+      <div class="opts">${opts.map(o=>`<button class="opt" data-id="${o.id}">${esc(o.t)}</button>`).join("")}</div>
+      <div class="ans" id="ans"><div class="nm">${esc(s.t)}</div><div class="alt">${esc(s.s)}・${esc(s.y)}</div>
+        <ul style="margin:8px 0 0;padding-left:1.2em">${(s.f||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+        <div class="talk">${esc(s.q)}</div>
+        <div class="navrow"><a class="pill" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${encodeURIComponent(s.t+" "+s.s)}">▶ YouTube 聽整首</a><button class="big" id="next">${i+1<n?"下一首 ➜":"看成績"}</button></div></div>`);
+      $("#play").onclick=()=>playSong(s,15);
+      $("#h1").onclick=()=>$("#hint1").classList.add("show");
+      $("#h2").onclick=()=>$("#hint2").classList.add("show");
+      app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+        const ok=b.dataset.id===s.id; if(ok)score++;
+        app.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(x.dataset.id===s.id)x.classList.add("ok");else if(x===b)x.classList.add("no")});
+        feedback(ok); $("#ans").classList.add("show"); $(".score").innerHTML=`第 ${i+1} / ${n} 首　答對 <b>${score}</b>`;
+        setTimeout(()=>$("#ans").scrollIntoView({behavior:"smooth",block:"nearest"}),300);
+      });
+      $("#next").onclick=()=>{i++; i<n?q():(stopSong(),result(g,score,n,()=>run(key)))};
+    };
+    q();
+  }
+}
+
+/* ---------- 俗語接龍 ---------- */
+function sayingGame(){
+  const g=GAMES.find(x=>x.id==="saying"); const n=8, qs=pick(SAYINGS,n); let i=0,score=0;
+  const q=()=>{
+    const s=qs[i], opts=shuffle([s,...pick(SAYINGS.filter(x=>x!==s),3)]);
+    shell(g,`<div class="ghead"><h2>📜 台灣俗語接龍</h2><div class="score">第 ${i+1} / ${n} 題　答對 <b>${score}</b></div></div>
+    <div class="progress"><i style="width:${i/n*100}%"></i></div>
+    <p class="qtitle" style="font-size:2.4em;text-align:center;margin:20px 0">「${s[0]}，<span style="border-bottom:4px solid var(--ink);padding:0 1em">？</span>」</p>
+    <div class="opts">${opts.map(o=>`<button class="opt" data-k="${esc(o[1])}">${o[1]}</button>`).join("")}</div>
+    <div class="ans" id="ans"><div class="nm">${s[0]}，${s[1]}</div><div>${s[2]}</div><div class="talk">你最常聽長輩說的一句俗語是什麼？</div>
+    <div class="navrow"><button class="pill" id="sayit">🔊 唸給我聽</button><button class="big" id="next">${i+1<n?"下一題 ➜":"看成績"}</button></div></div>`);
+    app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{const ok=b.dataset.k===s[1];if(ok)score++;
+      app.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(x.dataset.k===s[1])x.classList.add("ok");else if(x===b)x.classList.add("no")});
+      feedback(ok);$("#ans").classList.add("show")});
+    $("#sayit").onclick=()=>say(s[0]+"，"+s[1]+"。"+s[2]);
+    $("#next").onclick=()=>{i++;i<n?q():result(g,score,n,sayingGame)};
+  };q();
+}
+
+/* ---------- 翻牌配對 ---------- */
+function memoryGame(){
+  const g=GAMES.find(x=>x.id==="memory");
+  shell(g,`<div class="ghead"><h2>🃏 翻牌配對</h2></div><p>一次翻兩張，一樣就留著。先記住位置！</p>
+  <div class="lvl"><button class="big alt" data-p="4">簡單 4 對</button><button class="big" data-p="6">普通 6 對</button><button class="big alt" data-p="8">挑戰 8 對</button></div>
+  <p class="wk">圖案：</p><div class="lvl" id="th">${["farm","bird","old","bug"].map((k,j)=>`<button class="pill ${j?"":"on"}" data-t="${k}">${PICSETS[k].icon} ${PICSETS[k].name.replace("猜","")}</button>`).join("")}</div>`);
+  let theme="farm";
+  app.querySelectorAll("#th button").forEach(b=>b.onclick=()=>{theme=b.dataset.t;app.querySelectorAll("#th button").forEach(x=>x.classList.toggle("on",x===b))});
+  app.querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>run(+b.dataset.p));
+  function run(p){
+    const items=pick(PICSETS[theme].items,p), deck=shuffle([...items,...items]); let open=[],found=0,tries=0,lock=false;
+    const cols=p===4?4:p===6?4:4;
+    shell(g,`<div class="ghead"><h2>🃏 翻牌配對</h2><div class="score">翻了 <b id="tries">0</b> 次　找到 <b id="fd">0</b> / ${p} 對</div></div>
+    <div class="mem" style="grid-template-columns:repeat(${cols},1fr);max-width:${p===8?760:680}px">${deck.map((it,k)=>`<button class="mc" data-k="${k}"><div class="in"><div class="bk">?</div><div class="fr" style="background-image:url('${img(theme,it[0])}')"><span>${it[1]}</span></div></div></button>`).join("")}</div>`);
+    app.querySelectorAll(".mc").forEach(b=>b.onclick=()=>{
+      if(lock||b.classList.contains("f"))return; b.classList.add("f"); open.push(b);
+      if(open.length===2){tries++;$("#tries").textContent=tries;lock=true;
+        const [a,c]=open; const same=deck[a.dataset.k]===deck[c.dataset.k];
+        setTimeout(()=>{ if(same){a.classList.add("done");c.classList.add("done");found++;$("#fd").textContent=found;beep(true);say(deck[a.dataset.k][1]);
+            if(found===p)setTimeout(()=>{const best=p, sc=Math.max(1,Math.round(p*Math.min(1,(p*1.6)/tries)));result(g,sc,best,memoryGame)},900)}
+          else{a.classList.remove("f");c.classList.remove("f")}
+          open=[];lock=false},same?500:1100);
+      }
+    });
+  }
+}
+
+/* ---------- 顏色字 ---------- */
+function stroopGame(){
+  const g=GAMES.find(x=>x.id==="stroop");
+  const C=[["紅","#c8312f"],["藍","#2257b5"],["綠","#2d8a4e"],["黃","#d9a300"]];
+  shell(g,`<div class="ghead"><h2>🎨 顏色字</h2></div><p>看到字以後，<b>不要唸字</b>，按下「字的顏色」。<br>例如 <span style="color:#2257b5;font-weight:900;font-size:1.4em">紅</span> → 要按「藍」。</p>
+  <div class="lvl"><button class="big alt" data-l="0">暖身：字和顏色一樣</button><button class="big" data-l="1">挑戰：字和顏色不一樣</button></div>`);
+  app.querySelectorAll("[data-l]").forEach(b=>b.onclick=()=>run(+b.dataset.l));
+  function run(hard){
+    const n=12;let i=0,score=0,t0=Date.now();
+    const q=()=>{
+      const w=C[Math.random()*4|0]; let col=w; if(hard){while(col===w)col=C[Math.random()*4|0]}
+      shell(g,`<div class="ghead"><h2>🎨 顏色字</h2><div class="score">第 ${i+1} / ${n} 題　答對 <b>${score}</b></div></div>
+      <div class="progress"><i style="width:${i/n*100}%"></i></div>
+      <p style="text-align:center;margin:0">這個字是什麼<b>顏色</b>？</p>
+      <div class="stroopword" style="color:${col[1]}">${w[0]}</div>
+      <div class="colorbtns">${C.map(c=>`<button style="background:${c[1]}" data-c="${c[0]}">${c[0]}</button>`).join("")}</div>`);
+      app.querySelectorAll(".colorbtns button").forEach(b=>b.onclick=()=>{const ok=b.dataset.c===col[0];if(ok)score++;feedback(ok,ok?"對！":"是"+col[0]+"色");i++;
+        setTimeout(()=>i<n?q():result(g,score,n,()=>run(hard)),ok?450:900)});
+    };q();
+  }
+}
+
+/* ---------- 數字順序 ---------- */
+function numbersGame(){
+  const g=GAMES.find(x=>x.id==="numbers");
+  shell(g,`<div class="ghead"><h2>🔢 數字順序</h2></div><p>從 1 開始，照順序一個一個點。手指動、眼睛找、腦袋記！</p>
+  <div class="lvl"><button class="big alt" data-n="9">簡單 1–9</button><button class="big" data-n="16">普通 1–16</button><button class="big alt" data-n="25">挑戰 1–25</button></div>`);
+  app.querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>run(+b.dataset.n));
+  function run(n){
+    const side=Math.sqrt(n);let next=1,t0=Date.now(),miss=0,tm;
+    shell(g,`<div class="ghead"><h2>🔢 數字順序</h2><div class="score">下一個：<b id="nx">1</b>　時間 <b id="tm">0</b> 秒</div></div>
+    <div class="numgrid" style="grid-template-columns:repeat(${side},1fr)">${shuffle([...Array(n)].map((_,k)=>k+1)).map(v=>`<button data-v="${v}">${v}</button>`).join("")}</div>`);
+    tm=setInterval(()=>{const e=$("#tm");if(!e)return clearInterval(tm);e.textContent=Math.round((Date.now()-t0)/1000)},500);
+    app.querySelectorAll(".numgrid button").forEach(b=>b.onclick=()=>{
+      if(+b.dataset.v===next){b.classList.add("done");next++;$("#nx").textContent=next>n?"完成":next;beep(true);
+        if(next>n){clearInterval(tm);const sec=Math.round((Date.now()-t0)/1000);setTimeout(()=>{result(g,Math.max(0,n-miss),n,numbersGame);$(".result h2").insertAdjacentHTML("afterend",`<p class="wk" style="font-size:1.4em">花了 ${sec} 秒・點錯 ${miss} 次</p>`)},500)}}
+      else if(!b.classList.contains("done")){miss++;b.classList.remove("bad");void b.offsetWidth;b.classList.add("bad");beep(false)}
+    });
+  }
+}
+
+/* ---------- 找不一樣 ---------- */
+function oddGame(){
+  const g=GAMES.find(x=>x.id==="odd");
+  const P=[["🍎","🍅"],["🐱","🐯"],["🌞","🌝"],["🚗","🚕"],["🍊","🍋"],["🐔","🐤"],["⏰","🕰️"],["🌸","🌺"],["🐟","🐠"],["☂️","🌂"],["🥚","🍳"],["👓","🕶️"],["🍵","☕"],["🐶","🐕"],["🌲","🌳"],["🔔","🛎️"],["🍙","🍘"],["🐄","🐂"]];
+  shell(g,`<div class="ghead"><h2>🔍 找不一樣</h2></div><p>每一題有一個圖案跟別人不一樣，把它找出來！</p>
+  <div class="lvl"><button class="big alt" data-s="3">簡單 3×3</button><button class="big" data-s="4">普通 4×4</button><button class="big alt" data-s="5">挑戰 5×5</button></div>`);
+  app.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>run(+b.dataset.s));
+  function run(s){
+    const n=8,qs=pick(P,n);let i=0,score=0;
+    const q=()=>{
+      const [a,b]=Math.random()<.5?qs[i]:[qs[i][1],qs[i][0]], at=Math.random()*s*s|0;
+      shell(g,`<div class="ghead"><h2>🔍 找不一樣</h2><div class="score">第 ${i+1} / ${n} 題　答對 <b>${score}</b></div></div>
+      <div class="progress"><i style="width:${i/n*100}%"></i></div>
+      <div class="oddgrid" style="grid-template-columns:repeat(${s},1fr)">${[...Array(s*s)].map((_,k)=>`<button data-k="${k}">${k===at?b:a}</button>`).join("")}</div>`);
+      app.querySelectorAll(".oddgrid button").forEach(x=>x.onclick=()=>{const ok=+x.dataset.k===at;if(ok)score++;
+        app.querySelectorAll(".oddgrid button")[at].style.cssText="border:4px solid var(--ok);background:#e8f4ec";feedback(ok,ok?"找到了！":"在這裡");i++;
+        setTimeout(()=>i<n?q():result(g,score,n,()=>run(s)),ok?600:1300)});
+    };q();
+  }
+}
+
+/* ---------- 菜市場算錢 ---------- */
+function marketGame(){
+  const g=GAMES.find(x=>x.id==="market");
+  shell(g,`<div class="ghead"><h2>🧺 菜市場算錢</h2></div><p>到市場買菜，算算看要付多少、老闆要找多少。</p>
+  <div class="lvl"><button class="big alt" data-l="1">簡單：買一樣</button><button class="big" data-l="2">普通：買兩樣</button><button class="big alt" data-l="3">挑戰：要找錢</button></div>`);
+  app.querySelectorAll("[data-l]").forEach(b=>b.onclick=()=>run(+b.dataset.l));
+  function run(l){
+    const n=6;let i=0,score=0;
+    const q=()=>{
+      let goods=pick(MARKET.filter(m=>m[2]<=90),l===1?1:2).map(m=>({m,c:l===1?1+(Math.random()*3|0):1+(Math.random()*2|0)}));
+      const total=goods.reduce((s,x)=>s+x.m[2]*x.c,0); let ask,ans,pay=0;
+      if(l===3){pay=total<=100?100:total<=500?500:1000;ask=`付 ${pay} 元，老闆要找多少？`;ans=pay-total}else{ask="一共要付多少錢？";ans=total}
+      const set=new Set([ans]);while(set.size<4){const d=[5,10,15,20,-5,-10,-15,-20][Math.random()*8|0];if(ans+d>0)set.add(ans+d)}
+      shell(g,`<div class="ghead"><h2>🧺 菜市場算錢</h2><div class="score">第 ${i+1} / ${n} 題　答對 <b>${score}</b></div></div>
+      <div class="progress"><i style="width:${i/n*100}%"></i></div>
+      <div class="basket">${goods.map(x=>`<div class="goods"><div class="e">${x.m[0]}</div><div class="wk">${x.m[1]}</div><div class="p">${x.m[2]} 元／${x.m[3]}</div><div>買 <b style="font-size:1.4em">${x.c}</b> ${x.m[3]}</div></div>`).join("")}</div>
+      ${pay?`<div class="coins"><div class="${pay>=500?"bill":"coin"}" style="${pay>=500?"":"width:96px;height:96px"}">${pay} 元</div></div>`:""}
+      <p class="qtitle" style="text-align:center;margin-top:14px">${ask}</p>
+      <div class="opts">${shuffle([...set]).map(v=>`<button class="opt" data-v="${v}">${v} 元</button>`).join("")}</div>
+      <div class="ans" id="ans"><div>${goods.map(x=>`${x.m[1]} ${x.m[2]}×${x.c}`).join("＋")} ＝ <b>${total} 元</b>${pay?`；${pay} − ${total} ＝ <b>${pay-total} 元</b>`:""}</div>
+      <div class="navrow"><button class="big" id="next">${i+1<n?"下一題 ➜":"看成績"}</button></div></div>`);
+      app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{const ok=+b.dataset.v===ans;if(ok)score++;
+        app.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(+x.dataset.v===ans)x.classList.add("ok");else if(x===b)x.classList.add("no")});feedback(ok);$("#ans").classList.add("show")});
+      $("#next").onclick=()=>{i++;i<n?q():result(g,score,n,()=>run(l))};
+    };q();
+  }
+}
+
+/* ---------- 買菜記憶 ---------- */
+function shopGame(){
+  const g=GAMES.find(x=>x.id==="shop");
+  shell(g,`<div class="ghead"><h2>📝 買菜記憶</h2></div><p>先看購物清單，記起來；清單蓋起來以後，從市場把東西挑出來。</p>
+  <div class="lvl"><button class="big alt" data-n="3">簡單 3 樣</button><button class="big" data-n="5">普通 5 樣</button><button class="big alt" data-n="7">挑戰 7 樣</button></div>
+  <p style="font-size:.8em;color:var(--ink2)">小撇步：把東西編成一個故事，例如「早上用<b>雞蛋</b>配<b>吐司</b>，中午煮<b>地瓜</b>稀飯」。</p>`);
+  app.querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>run(+b.dataset.n));
+  function run(n){
+    const list=pick(MARKET,n), pool=shuffle([...list,...pick(MARKET.filter(m=>!list.includes(m)),Math.min(12,n*2+2)-n)]);
+    let sec=n*4;
+    shell(g,`<div class="ghead"><h2>📝 購物清單</h2><div class="countdown">還有 <span id="cd">${sec}</span> 秒</div></div>
+    <div class="basket">${list.map(m=>`<div class="goods"><div class="e">${m[0]}</div><div class="wk" style="font-size:1.2em">${m[1]}</div></div>`).join("")}</div>
+    <div class="navrow" style="justify-content:center"><button class="big" id="ready">記好了！</button></div>`);
+    const tmr=setInterval(()=>{sec--;const e=$("#cd");if(!e)return clearInterval(tmr);e.textContent=sec;if(sec<=0){clearInterval(tmr);pickPhase()}},1000);
+    $("#ready").onclick=()=>{clearInterval(tmr);pickPhase()};
+    function pickPhase(){
+      const sel=new Set();
+      shell(g,`<div class="ghead"><h2>📝 要買哪些？</h2><div class="score">選了 <b id="cnt">0</b> / ${n} 樣</div></div>
+      <div class="recall">${pool.map((m,k)=>`<button data-k="${k}"><span class="e">${m[0]}</span>${m[1]}</button>`).join("")}</div>
+      <div class="navrow"><button class="big" id="check">對答案</button></div>`);
+      app.querySelectorAll(".recall button").forEach(b=>b.onclick=()=>{const k=+b.dataset.k;sel.has(k)?sel.delete(k):sel.add(k);b.classList.toggle("sel");$("#cnt").textContent=sel.size});
+      $("#check").onclick=()=>{let sc=0;app.querySelectorAll(".recall button").forEach(b=>{const k=+b.dataset.k,inL=list.includes(pool[k]);b.disabled=true;b.classList.remove("sel");
+          if(sel.has(k)&&inL){b.classList.add("ok");sc++}else if(sel.has(k))b.classList.add("no");else if(inL)b.classList.add("miss")});
+        feedback(sc===n,sc===n?"全對！":`記得 ${sc} 樣`);
+        $("#check").outerHTML=`<button class="big" id="fin">看成績</button>`;$("#fin").onclick=()=>result(g,sc,n,()=>run(n))};
+    }
+  }
+}
+
+/* ---------- 圖片來源 ---------- */
+async function credits(){
+  $("#barTitle").textContent="圖片與音樂來源";
+  let m={};try{m=await (await fetch("img/meta.json")).json()}catch(e){}
+  app.innerHTML=`<div class="stage"><h2>圖片與音樂來源</h2>
+  <p style="font-size:.75em">照片取自維基共享資源（Wikimedia Commons），依各作者授權條款使用；點檔名可看原始頁面與完整授權。猜歌的 30 秒試聽由 Apple iTunes 提供，只作為課堂猜歌使用。</p>
+  <div class="cred">${Object.entries(m).sort().map(([k,v])=>`<div><b>${esc(v.zh)}</b>：<a target="_blank" rel="noopener" href="https://commons.wikimedia.org/wiki/File:${encodeURIComponent(v.file)}">${esc(v.file)}</a>，${esc(v.artist||"作者見原頁")}，${esc(v.license||"")}</div>`).join("")}</div></div>`;
+}
+
+/* ---------- 路由 ---------- */
+function route(){
+  stopSong(); try{speechSynthesis.cancel()}catch(e){}
+  let h=location.hash.slice(1);
+  if(h==="random"){const g=GAMES[Math.random()*GAMES.length|0];location.replace("#"+g.id);return}
+  const map={song:songGame,saying:sayingGame,memory:memoryGame,stroop:stroopGame,numbers:numbersGame,odd:oddGame,market:marketGame,shop:shopGame,credits};
+  if(h.startsWith("pic-")&&PICSETS[h.slice(4)])return picGame(h.slice(4));
+  (map[h]||home)();
+}
+addEventListener("hashchange",route); route();
+if("serviceWorker" in navigator && location.protocol==="https:")navigator.serviceWorker.register("sw.js").catch(()=>{});
+</script>
+</body>
+</html>
